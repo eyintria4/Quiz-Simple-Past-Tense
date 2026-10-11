@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>index</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#4c1d95;--bg2:#0e7490;--card:#fff;--ink:#1e1b4b;--mut:#64748b;--pri:#7c3aed;--pri2:#6d28d9;--ok:#16a34a;--okbg:#dcfce7;--doubt:#f59e0b;--doubtbg:#fef3c7;--no:#e11d48;--nobg:#ffe4e6;--idle:#e2e8f0;--sun:#fde047;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:#4c1d95 linear-gradient(135deg,var(--bg1),var(--bg2)) fixed}
+.wrap{max-width:860px;margin:0 auto;padding:18px 14px 40px}
+.card{background:var(--card);border-radius:22px;padding:24px;box-shadow:0 14px 40px rgba(20,10,60,.35)}
+h1{font-size:1.9rem;line-height:1.15;margin:0 0 6px;font-weight:900}
+.sub{color:var(--mut);margin:0 0 20px;font-weight:700}
+.badge{display:inline-block;background:var(--sun);color:#422006;font-weight:900;padding:6px 14px;border-radius:99px;margin-bottom:14px}
+label{display:block;font-weight:800;margin:14px 0 6px}
+input,select{width:100%;padding:13px 14px;border:2.5px solid var(--idle);border-radius:14px;font:inherit;font-weight:700;color:var(--ink);background:#fff}
+input:focus,select:focus,button:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-color:var(--pri)}
+.btn{border:0;font:inherit;font-weight:900;padding:13px 22px;border-radius:14px;cursor:pointer;color:#fff;background:var(--pri);box-shadow:0 4px 0 var(--pri2)}
+.btn:active{transform:translateY(2px);box-shadow:0 2px 0 var(--pri2)}
+.btn.big{width:100%;margin-top:22px;font-size:1.1rem;background:linear-gradient(90deg,#7c3aed,#0891b2);box-shadow:0 4px 0 #4c1d95}
+.btn.doubt{background:var(--doubt);color:#422006;box-shadow:0 4px 0 #b45309}
+.btn.doubt.on{background:#b45309;color:#fff;box-shadow:0 4px 0 #78350f}
+.btn.gray{background:#475569;box-shadow:0 4px 0 #1e293b}
+.btn.fin{background:var(--ok);box-shadow:0 4px 0 #166534}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.hidden{display:none!important}
+.top{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;color:#fff;margin-bottom:12px}
+.who{font-weight:800;font-size:.95rem;line-height:1.3}
+.who small{display:block;opacity:.85;font-weight:700}
+.timer{background:var(--sun);color:#422006;font-weight:900;font-size:1.4rem;padding:8px 18px;border-radius:99px;font-variant-numeric:tabular-nums}
+.timer.low{background:var(--no);color:#fff;animation:p 1s infinite}
+@keyframes p{50%{transform:scale(1.07)}}
+.bar{height:10px;background:rgba(255,255,255,.3);border-radius:9px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;width:0;background:var(--sun);transition:width .3s}
+.qno{font-weight:900;color:var(--pri);margin-bottom:8px}
+.qtext{font-size:1.3rem;font-weight:800;line-height:1.4;margin:0 0 18px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;font:inherit;font-weight:700;font-size:1.05rem;color:var(--ink);background:#fff;border:2.5px solid var(--idle);border-radius:16px;padding:13px 14px;margin-bottom:10px;cursor:pointer}
+.opt:hover{border-color:var(--pri)}
+.opt b{flex:none;width:34px;height:34px;border-radius:50%;background:var(--idle);display:grid;place-items:center;font-weight:900}
+.opt.sel{border-color:var(--pri);background:#ede9fe}
+.opt.sel b{background:var(--pri);color:#fff}
+.nav{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:18px}
+.nav .btn{flex:1 1 120px}
+.grid{margin-top:16px}
+.grid h3{margin:0 0 10px;font-size:1rem}
+.nums{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.n{border:2.5px solid transparent;font:inherit;font-weight:900;padding:10px 0;border-radius:12px;cursor:pointer;background:var(--idle);color:#334155}
+.n.ans{background:var(--ok);color:#fff}
+.n.dbt{background:var(--doubt);color:#422006}
+.n.cur{border-color:var(--ink);box-shadow:0 0 0 3px var(--sun)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-weight:800;font-size:.85rem}
+.legend span::before{content:"";display:inline-block;width:14px;height:14px;border-radius:5px;margin-right:6px;vertical-align:-2px;background:var(--c)}
+.score{text-align:center;padding:10px 0 4px}
+.ring{width:170px;height:170px;border-radius:50%;margin:8px auto 14px;display:grid;place-items:center;background:conic-gradient(var(--c,#16a34a) calc(var(--p)*1%),var(--idle) 0)}
+.ring div{width:134px;height:134px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:3rem;font-weight:900}
+.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:16px 0}
+.info div{background:#f5f3ff;border-radius:14px;padding:10px 14px;font-weight:800}
+.info small{display:block;color:var(--mut);font-weight:700}
+.stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-weight:800}
+.stats span{padding:6px 14px;border-radius:99px}
+.rv{border:2.5px solid var(--idle);border-radius:18px;padding:16px;margin-top:14px}
+.rv.ok{border-color:var(--ok);background:#f0fdf4}
+.rv.bad{border-color:var(--no);background:#fff1f2}
+.rv h4{margin:0 0 8px;font-size:1.05rem;line-height:1.4}
+.rv p{margin:6px 0;font-weight:700}
+.tag{display:inline-block;padding:3px 10px;border-radius:99px;font-weight:900;font-size:.85rem}
+.tag.ok{background:var(--okbg);color:#166534}.tag.bad{background:var(--nobg);color:#9f1239}
+.exp{background:#fff;border-left:5px solid var(--pri);border-radius:8px;padding:10px 12px;margin-top:10px;font-weight:700}
+.modal{position:fixed;inset:0;background:rgba(15,10,40,.7);display:grid;place-items:center;padding:20px;z-index:9}
+.modal .card{max-width:400px;text-align:center}
+.modal .row{display:flex;gap:10px;margin-top:16px}.modal .btn{flex:1}
+@media(max-width:480px){h1{font-size:1.55rem}.qtext{font-size:1.15rem}.card{padding:18px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section id="start" class="card">
+  <span class="badge">English · Simple Past Tense</span>
+  <h1>Quiz Bahasa Inggris</h1>
+  <p class="sub">10 soal pilihan ganda · waktu 10 menit</p>
+  <label for="nama">Nama Peserta Didik</label>
+  <input id="nama" placeholder="Tulis nama lengkap" autocomplete="name">
+  <label for="kelas">Kelas</label>
+  <select id="kelas"><option value="">Pilih kelas</option><option>X</option><option>XI</option><option>XII</option></select>
+  <label for="sekolah">Asal Sekolah</label>
+  <input id="sekolah" placeholder="Nama sekolah">
+  <p id="err" style="color:var(--no);font-weight:800;margin:12px 0 0"></p>
+  <button class="btn big" id="go">Mulai Quiz</button>
+</section>
+
+<section id="quiz" class="hidden">
+  <div class="top">
+    <div class="who" id="who"></div>
+    <div class="timer" id="timer">10:00</div>
+  </div>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="card">
+    <div class="qno" id="qno"></div>
+    <p class="qtext" id="qtext"></p>
+    <div id="opts"></div>
+    <div class="nav">
+      <button class="btn gray" id="prev">Sebelumnya</button>
+      <button class="btn doubt" id="dbt">Ragu-ragu</button>
+      <button class="btn" id="next">Selanjutnya</button>
+    </div>
+    <div class="grid">
+      <h3>Navigasi Soal</h3>
+      <div class="nums" id="nums"></div>
+      <div class="legend">
+        <span style="--c:var(--ok)">Sudah dijawab</span>
+        <span style="--c:var(--doubt)">Ragu-ragu</span>
+        <span style="--c:var(--idle)">Belum dijawab</span>
+      </div>
+    </div>
+    <button class="btn big fin" id="fin">Selesai &amp; Kumpulkan</button>
+  </div>
+</section>
+
+<section id="result" class="hidden">
+  <div class="card">
+    <div class="score">
+      <span class="badge" id="msg"></span>
+      <div class="ring" id="ring"><div id="sc">0</div></div>
+      <div class="stats" id="stats"></div>
+    </div>
+    <div class="info" id="info"></div>
+    <h2 style="margin:22px 0 0">Pembahasan Soal</h2>
+    <div id="review"></div>
+    <button class="btn big" onclick="location.reload()">Ulangi Quiz</button>
+  </div>
+</section>
+
+</div>
+<div id="modal" class="modal hidden"><div class="card">
+  <h2 style="margin:0 0 8px">Kumpulkan jawaban?</h2>
+  <p id="mtxt" style="font-weight:700;color:var(--mut);margin:0"></p>
+  <div class="row"><button class="btn gray" id="mno">Kembali</button><button class="btn fin" id="myes">Kumpulkan</button></div>
+</div></div>
+
+<script>
+const Q=[
+{q:"She _____ to Bali with her family during the last school holiday.",o:["go","goes","went","gone"],a:2,e:"Kalimat menunjukkan kejadian lampau ('last school holiday'). Kata kerja bentuk kedua (Verb 2) dari 'go' adalah 'went'."},
+{q:"They _____ football in the school yard yesterday afternoon because it rained heavily.",o:["didn't play","don't play","weren't play","aren't playing"],a:0,e:"Bentuk negatif Simple Past Tense menggunakan rumus Subject + didn't + Verb 1 (play)."},
+{q:"_____ you watch the new action movie at the cinema last night?",o:["Do","Does","Did","Were"],a:2,e:"Kalimat tanya (interrogative) verbal dalam Simple Past Tense diawali dengan kata bantu 'Did'."},
+{q:"Rina and Maya _____ very happy when they won the English debate competition last week.",o:["is","was","are","were"],a:3,e:"Subjek jamak ('Rina and Maya') dalam kalimat nominal bentuk lampau menggunakan to be 'were'."},
+{q:"My father _____ a new computer two days ago.",o:["buy","bought","buys","buying"],a:1,e:"'Two days ago' merupakan penanda waktu lampau. Irregular verb 2 dari 'buy' adalah 'bought'."},
+{q:"What time _____ you wake up this morning?",o:["do","did","was","were"],a:1,e:"Pertanyaan Wh-Question bentuk lampau verbal menggunakan pola: Wh-Word + did + S + V1."},
+{q:"I _____ not attend the student organization meeting yesterday because I felt sick.",o:["did","was","do","am"],a:0,e:"Bentuk negatif membutuhkan kata bantu auxiliary 'did' sebelum kata 'not'."},
+{q:"The students _____ excited during the study tour to the museum last month.",o:["was","were","are","be"],a:1,e:"Subjek jamak 'The students' diikuti dengan nominal past to be 'were'."},
+{q:"We _____ our homework together at the library yesterday.",o:["finish","finished","finishing","finishes"],a:1,e:"'Finished' adalah bentuk Regular Verb 2 dari kata kerja 'finish'."},
+{q:"Why _____ you late for the English class this morning?",o:["was","did","were","are"],a:2,e:"Kalimat nominal dengan subjek 'you' pada waktu lampau ('this morning') menggunakan to be 'were'."}
+];
+const L="ABCD",$=id=>document.getElementById(id);
+const S={i:0,ans:Array(Q.length).fill(null),dbt:Array(Q.length).fill(false),left:600,tm:null,user:{},done:false};
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('go').onclick=()=>{
+  const n=$('nama').value.trim(),k=$('kelas').value,s=$('sekolah').value.trim();
+  if(!n||!k||!s){$('err').textContent='Lengkapi nama, kelas, dan asal sekolah dulu ya.';return}
+  S.user={n,k,s};
+  $('who').innerHTML=esc(n)+'<small>Kelas '+esc(k)+' · '+esc(s)+'</small>';
+  $('start').classList.add('hidden');$('quiz').classList.remove('hidden');
+  render();
+  S.tm=setInterval(()=>{S.left--;tick();if(S.left<=0)finish()},1000);
+};
+function tick(){
+  const m=Math.floor(S.left/60),s=S.left%60;
+  $('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  $('timer').classList.toggle('low',S.left<=60);
+}
+function render(){
+  const q=Q[S.i];
+  $('qno').textContent='Soal '+(S.i+1)+' dari '+Q.length;
+  $('qtext').textContent=q.q;
+  $('opts').innerHTML=q.o.map((t,j)=>`<button class="opt ${S.ans[S.i]===j?'sel':''}" data-j="${j}"><b>${L[j]}</b><span>${esc(t)}</span></button>`).join('');
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{S.ans[S.i]=+b.dataset.j;render()});
+  $('prev').disabled=S.i===0;$('next').disabled=S.i===Q.length-1;
+  $('dbt').classList.toggle('on',S.dbt[S.i]);
+  $('dbt').textContent=S.dbt[S.i]?'Batal Ragu-ragu':'Ragu-ragu';
+  $('nums').innerHTML=Q.map((_,j)=>`<button class="n ${S.dbt[j]?'dbt':S.ans[j]!==null?'ans':''} ${j===S.i?'cur':''}" data-j="${j}" aria-label="Soal ${j+1}">${j+1}</button>`).join('');
+  document.querySelectorAll('.n').forEach(b=>b.onclick=()=>{S.i=+b.dataset.j;render()});
+  $('pbar').style.width=(S.ans.filter(a=>a!==null).length/Q.length*100)+'%';
+}
+$('prev').onclick=()=>{if(S.i>0){S.i--;render()}};
+$('next').onclick=()=>{if(S.i<Q.length-1){S.i++;render()}};
+$('dbt').onclick=()=>{S.dbt[S.i]=!S.dbt[S.i];render()};
+$('fin').onclick=()=>{
+  const un=S.ans.filter(a=>a===null).length,d=S.dbt.filter(Boolean).length;
+  let t=un?un+' soal belum dijawab. ':'Semua soal sudah dijawab. ';
+  if(d)t+=d+' soal masih ditandai ragu-ragu. ';
+  $('mtxt').textContent=t+'Setelah dikumpulkan, jawaban tidak bisa diubah.';
+  $('modal').classList.remove('hidden');
+};
+$('mno').onclick=()=>$('modal').classList.add('hidden');
+$('myes').onclick=finish;
+function finish(){
+  if(S.done)return;S.done=true;clearInterval(S.tm);
+  $('modal').classList.add('hidden');
+  $('quiz').classList.add('hidden');$('result').classList.remove('hidden');
+  const ok=S.ans.filter((a,i)=>a===Q[i].a).length,un=S.ans.filter(a=>a===null).length,bad=Q.length-ok-un;
+  const score=Math.round(ok/Q.length*100);
+  $('sc').textContent=score;
+  $('ring').style.setProperty('--p',score);
+  $('ring').style.setProperty('--c',score>=75?'#16a34a':score>=50?'#f59e0b':'#e11d48');
+  $('msg').textContent=score>=75?'Hebat! Pertahankan ya!':score>=50?'Lumayan, ayo belajar lagi!':'Jangan menyerah, coba lagi!';
+  $('stats').innerHTML=`<span style="background:var(--okbg);color:#166534">Benar: ${ok}</span><span style="background:var(--nobg);color:#9f1239">Salah: ${bad}</span><span style="background:var(--idle)">Kosong: ${un}</span>`;
+  const used=600-Math.max(S.left,0);
+  $('info').innerHTML=`<div><small>Nama</small>${esc(S.user.n)}</div><div><small>Kelas</small>${esc(S.user.k)}</div><div><small>Asal Sekolah</small>${esc(S.user.s)}</div><div><small>Waktu terpakai</small>${Math.floor(used/60)} menit ${used%60} detik</div>`;
+  $('review').innerHTML=Q.map((q,i)=>{
+    const a=S.ans[i],right=a===q.a;
+    return `<div class="rv ${right?'ok':'bad'}"><h4>${i+1}. ${esc(q.q)}</h4>
+    <span class="tag ${right?'ok':'bad'}">${right?'Benar':a===null?'Tidak dijawab':'Salah'}</span>
+    <p>Jawabanmu: ${a===null?'–':L[a]+'. '+esc(q.o[a])}</p>
+    <p>Kunci jawaban: ${L[q.a]}. ${esc(q.o[q.a])}</p>
+    <div class="exp">Pembahasan: ${esc(q.e)}</div></div>`}).join('');
+  window.scrollTo({top:0});
+}
+</script>
+</body>
+</html>
